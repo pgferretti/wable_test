@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container" style="margin-top: 20px;">
+	
+ 	<div class="jumbotron">
+		 <form class="form-horizontal" role="form" action="." method="post" enctype="multipart/form-data">
+		 {% csrf_token %}
+		 {{ form.media }}
+		 {{ form.as_p }}       
+			<button type="submit" class="btn btn-primary"> Salvar </button>
+		     <a href="/modelform_example/" class="btn btn-primary" >Show Alert</a>
+		     <a href="/logout/" class="btn btn-primary" data-ajax="true" data-success="test_post">Logout</a>		        
+		 </form>
+	</div>  
+</div> 
+
+{% endblock %}
+

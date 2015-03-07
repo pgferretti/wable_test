@@ -1,0 +1,7 @@
+django >= 1.7, < 1.8
+parse-rest==0.2.20141004
+six==1.9.0
+django-imagekit==3.2.5
+easy-thumbnails==2.2
+Pillow==2.7.0
+psycopg2==2.6

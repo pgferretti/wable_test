@@ -1,0 +1,87 @@
+{% load staticfiles %}
+{% load cropping %}
+{% load url from future %}
+<!DOCTYPE html>
+<html>
+  <head>
+      <!-- Bootstrap Core CSS -->
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}" id="bs-css">
+	<link rel="stylesheet" href="{% static "css/bootstrap-theme.min.css" %}">
+	
+	<link href="{% static "font-awesome/css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">	
+
+    
+    <title>Image cropping example {% block title %}{% endblock %}</title>
+    <style type="text/css">
+      th {text-align: left;}
+      #navigation li {
+        display: inline;
+        list-style-type: none;
+        padding-right: 10px;
+      }
+      article, aside, figure, footer, header, hgroup, 
+  	  menu, nav, section { display: block; }
+    </style>
+    {% block extra_head %}
+    {% endblock %}
+  </head>
+  <body>
+    {% block content %}
+    <input class="datepicker" data-date-format="mm/dd/yyyy">
+    {% endblock %}
+  </body>
+  <script src="{% static "js/jquery.min.js" %}"></script>
+   <!-- Latest compiled and minified JavaScript -->
+  <script src="{% static "js/bootstrap.min.js" %}"></script>
+  <script src="{% static "js/bootstrap-filestyle.min.js" %}"></script>
+  <script src="{% static "js/jquery-ui.min.js" %}"></script>
+  <script src="{% static "js/jquery.form.js" %}"></script>
+  <script src="{% static "js/jquery.form.min.js" %}"></script>
+  <script src="{% static "js/jquery.maskedinput.js" %}"></script>
+
+  <script type="text/javascript">
+
+ 	//Stle for input file
+  	$("#file_profile").filestyle({buttonBefore: true, buttonName: "btn-primary", buttonText: "Imagem", input: false});
+  	$(":file").filestyle({buttonBefore: true, buttonName: "btn-primary", buttonText: "Adicionar Imagem"});
+  	
+  	
+    //Masks for inputs
+    $(function() {
+        $.mask.definitions['~'] = "[+-]";
+        $("#date").mask("99/99/9999", {autoclear: false});
+        $("#id_birthday").mask("99/99/9999", {autoclear: false});
+        $("#phone").mask("(99) 9999-99999", {autoclear: false});
+        $("#id_phone").mask("(99) 9999-99999", {autoclear: false});
+        $("input").blur(function() {
+            $("#info").html("Unmasked value: " + $(this).mask());
+        }).dblclick(function() {
+            $(this).unmask();
+        });
+    });
+  	
+  	//Function for input file
+ 	function readURL(input) {  		
+        if (input.files && input.files[0]) {        	
+            var reader = new FileReader();
+            reader.onload = function (e) { 
+                //Submit form
+               /*  $("#cropping_form").submit(); */
+              
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    } 
+ 	function readFile(input) {  		
+        if (input.files && input.files[0]) {        	
+            var reader = new FileReader();
+            reader.onload = function (e) { 
+            	$('#img_avatar').attr('src', e.target.result);              
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }             
+  </script>
+  
+</html>
